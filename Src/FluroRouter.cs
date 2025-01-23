@@ -79,6 +79,8 @@ namespace UIWidgetsFluro
                 maintainState: maintainState,
                 routeSettings: routeSettings);
 
+            Debug.Log(routeMatch);
+
 
             Route route = routeMatch.route;
             IPendingPromise<string> completer = new Promise<string>();
@@ -98,7 +100,8 @@ namespace UIWidgetsFluro
                 
                 if(route != null)
                 {
-                    var navigator = Navigator.of(context, rootNavigator: rootNavigator);
+                    
+                    NavigatorState navigator = Navigator.of(context, rootNavigator: rootNavigator);
                     if (clearStack)
                     {
                         future = navigator.pushAndRemoveUntil(route, (check) => false);
@@ -369,7 +372,7 @@ namespace UIWidgetsFluro
         /// Route generation method. This function can be used as a way to create routes on-the-fly
         /// if any defined handler is found. It can also be used with the [MaterialApp.onGenerateRoute]
         /// property as callback to create routes that can be used with the [Navigator] class.
-        Route generator(RouteSettings routeSettings)
+        public Route Generator(RouteSettings routeSettings)
         {
             RouteMatch match = MatchRoute(
               null,
@@ -382,7 +385,7 @@ namespace UIWidgetsFluro
         }
 
         //used with the [MaterialApp.onGenerateInitailRoute]
-        List<Route> generatorInitail(String name)
+        public List<Route> GeneratorInitail(String name)
         {
             RouteMatch match = MatchRoute(
               null,

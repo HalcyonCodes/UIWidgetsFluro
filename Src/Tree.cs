@@ -172,7 +172,9 @@ namespace UIWidgetsFluro
             if (path == Navigator.defaultRouteName)
             {
                 components = new[] { "/" };
+                
             }
+            //Debug.Log(usePath);
 
             var nodeMatches = new Dictionary<RouteTreeNode, RouteTreeNodeMatch>();
             var nodesToCheck = _nodes;
@@ -198,8 +200,21 @@ namespace UIWidgetsFluro
 
                     if (isMatch)
                     {
-                        RouteTreeNodeMatch parentMatch =  nodeMatches[node.parent];
+                        //Debug.Log("TTTEEESSSTTTT");
+                        
+                        RouteTreeNodeMatch parentMatch;
+                        if (node.parent == null)
+                        {
+                            parentMatch = null;
+                        }
+                        else
+                        {
+                            parentMatch = nodeMatches[node.parent];
+                        }
+                        
+                        
                         var match = new RouteTreeNodeMatch(parentMatch, node);
+                        Debug.Log(match);
                         if (node.IsParameter())
                         {
                             string paramKey = node.part.Substring(1);
